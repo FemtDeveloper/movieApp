@@ -1,8 +1,14 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {DetailsScreen, HomeScreen} from '../screens/';
+import {Movie} from '../interfaces/moviesInterfaces';
 
-const Stack = createStackNavigator();
+export type RootStackParams = {
+  HomeScreen: undefined;
+  DetailsScreen: Movie;
+};
+
+const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigation = () => {
   return (
