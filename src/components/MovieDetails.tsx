@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
 import {MovieFull} from '../interfaces/moviesInterfaces';
 import {Cast} from '../interfaces/CreditsInterface';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {CastItem} from './CastItem';
 
 interface Props {
   movieFull: MovieFull;
@@ -12,7 +13,7 @@ interface Props {
 export const MovieDetails = ({movieFull, cast}: Props) => {
   return (
     <>
-      <View>
+      <View style={{marginLeft: 20}}>
         <View style={{flexDirection: 'row'}}>
           <Icon name="star-outline" size={17} color={'grey'} />
           <Text> {movieFull.vote_average}</Text>
@@ -35,6 +36,32 @@ export const MovieDetails = ({movieFull, cast}: Props) => {
           }).format(movieFull.budget)}
         </Text>
       </View>
+      <View style={{marginBottom: 100, marginTop: 10}}>
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: 'bold',
+            marginTop: 10,
+            marginLeft: 20,
+          }}>
+          Actores
+        </Text>
+        <FlatList
+          data={cast}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({item}) => <CastItem actor={item} />}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.scrollCast}
+        />
+      </View>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  scrollCast: {
+    marginTop: 10,
+    height: 70,
+  },
+});
