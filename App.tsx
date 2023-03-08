@@ -8,11 +8,14 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {Navigation} from './src/navigation/Navigation';
+import {GradientProvider} from './src/context/GradientContext';
 
 function App(): JSX.Element {
   return (
     <NavigationContainer>
-      <Navigation />
+      <GradientProvider>
+        <Navigation />
+      </GradientProvider>
     </NavigationContainer>
   );
 }
